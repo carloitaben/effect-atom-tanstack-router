@@ -1,0 +1,17 @@
+{
+  "name": "effect-atom-tanstack-router",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "format": "oxfmt --write .",
+    "format:check": "oxfmt --check .",
+    "lint": "oxlint .",
+    "release": "pnpm -r --filter \"effect-atom-tanstack-*\" build && changeset publish"
+  },
+  "devDependencies": {
+    "@changesets/cli": "^2.31.1",
+    "oxfmt": "^0.65.0",
+    "oxlint": "1.80.0"
+  },
+  "packageManager": "pnpm@11.13.0"
+}

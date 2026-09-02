@@ -1,0 +1,17 @@
+{
+  "semi": false,
+  "printWidth": 80,
+  "sortImports": {
+    "newlinesBetween": false,
+    "groups": [
+      "side_effect",
+      "builtin",
+      "external",
+      "internal",
+      ["parent", "sibling", "index"],
+      "style",
+      "unknown"
+    ],
+    "internalPattern": ["#"]
+  }
+}

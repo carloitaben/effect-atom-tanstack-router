@@ -1,0 +1,11 @@
+packages:
+  - "packages/*"
+  - "examples/*"
+
+catalog:
+  typescript: 7.0.2
+
+allowBuilds:
+  esbuild: true
+  msgpackr-extract: true
+  unrs-resolver: true

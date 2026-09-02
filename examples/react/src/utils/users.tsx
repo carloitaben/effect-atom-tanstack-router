@@ -1,0 +1,68 @@
+import * as Effect from "effect/Effect"
+import * as Schema from "effect/Schema"
+import * as FetchHttpClient from "effect/unstable/http/FetchHttpClient"
+import * as HttpClient from "effect/unstable/http/HttpClient"
+import * as HttpClientResponse from "effect/unstable/http/HttpClientResponse"
+import * as AsyncResult from "effect/unstable/reactivity/AsyncResult"
+import * as Atom from "effect/unstable/reactivity/Atom"
+
+export type User = {
+  id: number
+  name: string
+  email: string
+}
+
+export const DEPLOY_URL = "http://localhost:3000"
+
+export const UserSchema = Schema.Struct({
+  id: Schema.Number,
+  name: Schema.String,
+  email: Schema.String,
+})
+
+const userResultSchema = AsyncResult.Schema({
+  success: UserSchema,
+  error: Schema.String,
+})
+
+function getJson<A>(url: string, schema: Schema.ConstraintDecoder<A>) {
+  return Effect.runPromise(
+    HttpClient.get(url).pipe(
+      Effect.flatMap(HttpClientResponse.filterStatusOk),
+      Effect.flatMap(HttpClientResponse.schemaBodyJson(schema)),
+      Effect.provide(FetchHttpClient.layer),
+    ),
+  )
+}
+
+export const usersAtom = Atom.make(
+  Effect.tryPromise({
+    try: () => getJson(DEPLOY_URL + "/api/users", Schema.Array(UserSchema)),
+    catch: (error) => (error instanceof Error ? error.message : String(error)),
+  }),
+).pipe(
+  Atom.keepAlive,
+  Atom.serializable({
+    key: "users",
+    schema: AsyncResult.Schema({
+      success: Schema.mutable(Schema.Array(UserSchema)),
+      error: Schema.String,
+    }),
+  }),
+)
+
+export const userAtom = Atom.family((id: string) =>
+  Atom.make(
+    Effect.tryPromise({
+      try: () => getJson(DEPLOY_URL + "/api/users/" + id, UserSchema),
+      catch: (error) =>
+        error instanceof Error ? error.message : String(error),
+    }),
+  ).pipe(
+    Atom.keepAlive,
+    Atom.serializable({
+      key: `user:${id}`,
+      schema: userResultSchema,
+    }),
+  ),
+)

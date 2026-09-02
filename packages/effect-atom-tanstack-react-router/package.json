@@ -1,0 +1,58 @@
+{
+  "name": "effect-atom-tanstack-react-router",
+  "version": "0.0.0",
+  "description": "TanStack Router SSR hydration integration for Effect Atom",
+  "homepage": "https://github.com/carloitaben/effect-atom-tanstack-router#readme",
+  "bugs": "https://github.com/carloitaben/effect-atom-tanstack-router/issues",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/carloitaben/effect-atom-tanstack-router.git"
+  },
+  "license": "MIT",
+  "sideEffects": false,
+  "type": "module",
+  "exports": {
+    ".": "./src/index.ts"
+  },
+  "main": "src/index.ts",
+  "types": "src/index.ts",
+  "files": [
+    "dist",
+    "LICENSE"
+  ],
+  "scripts": {
+    "build": "tsdown",
+    "prepublishOnly": "cp ../../LICENSE LICENSE",
+    "test": "vitest",
+    "typecheck": "tsc"
+  },
+  "devDependencies": {
+    "@effect/atom-react": "4.0.0-rc.112",
+    "@effect/vitest": "4.0.0-rc.112",
+    "@tanstack/react-router": "^1.170.32",
+    "@tanstack/router-core": "^1.171.27",
+    "@types/react": "^19.0.8",
+    "effect": "4.0.0-rc.112",
+    "react": "^19.0.0",
+    "tsdown": "^0.22.14",
+    "typescript": "catalog:",
+    "vitest": "^4.1.11"
+  },
+  "peerDependencies": {
+    "@effect/atom-react": ">=4.0.0-beta",
+    "@tanstack/react-router": ">=1.127.0",
+    "@tanstack/router-core": ">=1.171.27",
+    "effect": ">=4.0.0-beta",
+    "react": ">=19.0.0 <20.0.0"
+  },
+  "publishConfig": {
+    "exports": {
+      ".": {
+        "types": "./dist/index.d.mts",
+        "default": "./dist/index.mjs"
+      }
+    },
+    "main": "./dist/index.mjs",
+    "types": "./dist/index.d.mts"
+  }
+}

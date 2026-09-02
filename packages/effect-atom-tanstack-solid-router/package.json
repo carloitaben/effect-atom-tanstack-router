@@ -1,0 +1,58 @@
+{
+  "name": "effect-atom-tanstack-solid-router",
+  "version": "0.0.0",
+  "description": "TanStack Router SSR hydration integration for Effect Atom",
+  "homepage": "https://github.com/carloitaben/effect-atom-tanstack-router#readme",
+  "bugs": "https://github.com/carloitaben/effect-atom-tanstack-router/issues",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/carloitaben/effect-atom-tanstack-router.git"
+  },
+  "license": "MIT",
+  "sideEffects": false,
+  "type": "module",
+  "exports": {
+    ".": "./src/index.ts"
+  },
+  "main": "src/index.ts",
+  "types": "src/index.ts",
+  "files": [
+    "dist",
+    "LICENSE"
+  ],
+  "scripts": {
+    "build": "tsdown",
+    "prepublishOnly": "cp ../../LICENSE LICENSE",
+    "test": "vitest",
+    "typecheck": "tsc"
+  },
+  "devDependencies": {
+    "@effect/atom-solid": "4.0.0-rc.112",
+    "@effect/vitest": "4.0.0-rc.112",
+    "@tanstack/router-core": "^1.171.27",
+    "@tanstack/solid-router": "^1.170.30",
+    "@types/react": "^19.0.8",
+    "effect": "4.0.0-rc.112",
+    "solid-js": "^1.9.15",
+    "tsdown": "^0.22.14",
+    "typescript": "catalog:",
+    "vitest": "^4.1.11"
+  },
+  "peerDependencies": {
+    "@effect/atom-solid": ">=4.0.0-beta",
+    "@tanstack/router-core": "^1.171.27",
+    "@tanstack/solid-router": ">=1.170.30",
+    "effect": ">=4.0.0-beta",
+    "solid-js": ">=1.9.0 <2.0.0"
+  },
+  "publishConfig": {
+    "exports": {
+      ".": {
+        "types": "./dist/index.d.mts",
+        "default": "./dist/index.mjs"
+      }
+    },
+    "main": "./dist/index.mjs",
+    "types": "./dist/index.d.mts"
+  }
+}
