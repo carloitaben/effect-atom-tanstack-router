@@ -2,7 +2,7 @@ import { useAtomSuspense } from "@effect/atom-react"
 import { ErrorComponent, Link, createFileRoute } from "@tanstack/react-router"
 import type { ErrorComponentProps } from "@tanstack/react-router"
 import { awaitAtomSettled } from "effect-atom-tanstack-react-router"
-import * as AsyncResult from "effect/unstable/reactivity/AsyncResult"
+import * as AsyncResult from "effect/reactivity/AsyncResult"
 import { NotFound } from "~/components/NotFound"
 import { postAtom } from "../utils/posts"
 

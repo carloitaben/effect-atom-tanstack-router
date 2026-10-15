@@ -9,3 +9,12 @@ allowBuilds:
   esbuild: true
   msgpackr-extract: true
   unrs-resolver: true
+
+minimumReleaseAgeExclude:
+  - "@effect/atom-react@4.0.5"
+  - "@effect/atom-solid@4.0.5"
+  - "@effect/vitest@4.0.5"
+  - effect@4.0.5
+  - "@vitest/mocker@5.0.5"
+  - "@vitest/spy@5.0.5"
+  - vitest@5.0.5

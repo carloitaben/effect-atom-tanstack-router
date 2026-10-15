@@ -7,7 +7,7 @@ import {
   createRootRouteWithContext,
 } from "@tanstack/react-router"
 import { TanStackRouterDevtools } from "@tanstack/react-router-devtools"
-import type { AtomRegistry } from "effect/unstable/reactivity/AtomRegistry"
+import type { AtomRegistry } from "effect/reactivity/AtomRegistry"
 import * as React from "react"
 import { DefaultCatchBoundary } from "~/components/DefaultCatchBoundary"
 import { NotFound } from "~/components/NotFound"

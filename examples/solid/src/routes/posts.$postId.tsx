@@ -2,7 +2,7 @@ import { useAtomValue } from "@effect/atom-solid"
 import { ErrorComponent, Link, createFileRoute } from "@tanstack/solid-router"
 import type { ErrorComponentProps } from "@tanstack/solid-router"
 import { awaitAtomSettled } from "effect-atom-tanstack-solid-router"
-import * as AsyncResult from "effect/unstable/reactivity/AsyncResult"
+import * as AsyncResult from "effect/reactivity/AsyncResult"
 import { NotFound } from "~/components/NotFound"
 import { postAtom } from "../utils/posts"
 

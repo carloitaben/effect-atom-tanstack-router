@@ -3,8 +3,8 @@
 A TanStack Start example demonstrating integration with Effect Atom.
 
 - [TanStack Router Docs](https://tanstack.com/router)
-- [Effect Atom API Reference](https://www.effect.website/docs/v4/api/effect/unstable/reactivity/Atom)
-- [Effect Atom API Reference](https://www.effect.website/docs/v4/api/effect/unstable/reactivity/Atom)
+- [Effect Atom API Reference](https://www.effect.website/docs/v4/api/effect/reactivity/Atom)
+- [Effect Atom API Reference](https://www.effect.website/docs/v4/api/effect/reactivity/Atom)
 - [Effect Atom React API Reference](https://www.effect.website/docs/v4/api/atom-react)
 
 ## Start a new project based on this example
