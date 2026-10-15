@@ -1,6 +1,6 @@
 {
   "name": "effect-atom-tanstack-solid-router",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "TanStack Router SSR hydration integration for Effect Atom",
   "homepage": "https://github.com/carloitaben/effect-atom-tanstack-router#readme",
   "bugs": "https://github.com/carloitaben/effect-atom-tanstack-router/issues",
