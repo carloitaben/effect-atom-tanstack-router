@@ -2,9 +2,9 @@ import { RegistryContext } from "@effect/atom-solid"
 import { isServer } from "@tanstack/router-core/isServer"
 import type { AnyRouter } from "@tanstack/solid-router"
 import * as Option from "effect/Option"
-import * as AsyncResult from "effect/unstable/reactivity/AsyncResult"
-import * as Atom from "effect/unstable/reactivity/Atom"
-import type { AtomRegistry } from "effect/unstable/reactivity/AtomRegistry"
+import * as AsyncResult from "effect/reactivity/AsyncResult"
+import * as Atom from "effect/reactivity/Atom"
+import type { AtomRegistry } from "effect/reactivity/AtomRegistry"
 import { createComponent } from "solid-js"
 
 type DehydratedAtomEntry = {

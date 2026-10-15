@@ -7,7 +7,7 @@ import {
   createRootRouteWithContext,
 } from "@tanstack/solid-router"
 import { TanStackRouterDevtools } from "@tanstack/solid-router-devtools"
-import type { AtomRegistry } from "effect/unstable/reactivity/AtomRegistry"
+import type { AtomRegistry } from "effect/reactivity/AtomRegistry"
 import type { JSX } from "solid-js"
 import { HydrationScript } from "solid-js/web"
 import { DefaultCatchBoundary } from "~/components/DefaultCatchBoundary"

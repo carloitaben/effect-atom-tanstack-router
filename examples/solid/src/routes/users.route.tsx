@@ -1,7 +1,7 @@
 import { useAtomValue } from "@effect/atom-solid"
 import { Link, Outlet, createFileRoute } from "@tanstack/solid-router"
 import { awaitAtomSettled } from "effect-atom-tanstack-solid-router"
-import * as AsyncResult from "effect/unstable/reactivity/AsyncResult"
+import * as AsyncResult from "effect/reactivity/AsyncResult"
 import { usersAtom } from "../utils/users"
 
 export const Route = createFileRoute("/users")({

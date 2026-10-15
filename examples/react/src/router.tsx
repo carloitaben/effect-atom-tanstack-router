@@ -1,7 +1,7 @@
 import { scheduleTask } from "@effect/atom-react"
 import { createRouter } from "@tanstack/react-router"
 import { setupRouterAtomIntegration } from "effect-atom-tanstack-react-router"
-import * as AtomRegistry from "effect/unstable/reactivity/AtomRegistry"
+import * as AtomRegistry from "effect/reactivity/AtomRegistry"
 import { DefaultCatchBoundary } from "./components/DefaultCatchBoundary"
 import { NotFound } from "./components/NotFound"
 import { routeTree } from "./routeTree.gen"

@@ -1,8 +1,8 @@
 {
   "name": "examples-solid",
   "private": true,
-  "sideEffects": false,
   "type": "module",
+  "sideEffects": false,
   "scripts": {
     "build": "vite build && tsc --noEmit",
     "dev": "vite dev",
@@ -10,11 +10,11 @@
     "start": "pnpx srvx --prod -s ../client dist/server/server.js"
   },
   "dependencies": {
-    "@effect/atom-solid": "4.0.0-rc.112",
+    "@effect/atom-solid": "4.0.5",
     "@tanstack/solid-router": "^1.170.30",
     "@tanstack/solid-router-devtools": "^1.167.1",
     "@tanstack/solid-start": "^1.168.47",
-    "effect": "4.0.0-rc.112",
+    "effect": "4.0.5",
     "effect-atom-tanstack-solid-router": "workspace:*",
     "solid-js": "^1.9.10",
     "tailwind-merge": "^3.6.0"

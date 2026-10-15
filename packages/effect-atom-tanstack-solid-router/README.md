@@ -9,7 +9,7 @@ First, add `AtomRegistry` to your root route context.
 ```ts
 // src/routes/__root.tsx
 import { createRootRouteWithContext } from "@tanstack/solid-router"
-import type { AtomRegistry } from "effect/unstable/reactivity/AtomRegistry"
+import type { AtomRegistry } from "effect/reactivity/AtomRegistry"
 
 export const Route = createRootRouteWithContext<{
   registry: AtomRegistry
@@ -24,7 +24,7 @@ Then, setup the atom registry and the integration.
 // src/router.tsx
 import { createRouter } from "@tanstack/solid-router"
 import { setupRouterAtomIntegration } from "effect-atom-tanstack-solid-router"
-import * as AtomRegistry from "effect/unstable/reactivity/AtomRegistry"
+import * as AtomRegistry from "effect/reactivity/AtomRegistry"
 
 export function getRouter() {
   const registry = AtomRegistry.make({ scheduleTask })
@@ -61,7 +61,7 @@ Await the atom and return data from the loader. Use this when the loader needs t
 
 ```ts
 import { awaitAtomSettled } from "effect-atom-tanstack-solid-router"
-import * as AsyncResult from "effect/unstable/reactivity/AsyncResult"
+import * as AsyncResult from "effect/reactivity/AsyncResult"
 
 loader: async ({ params: { postId }, context }) => {
   const data = await awaitAtomSettled(context.registry, postAtom(postId))

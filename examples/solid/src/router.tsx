@@ -1,6 +1,6 @@
 import { createRouter } from "@tanstack/solid-router"
 import { setupRouterAtomIntegration } from "effect-atom-tanstack-solid-router"
-import * as AtomRegistry from "effect/unstable/reactivity/AtomRegistry"
+import * as AtomRegistry from "effect/reactivity/AtomRegistry"
 import { DefaultCatchBoundary } from "./components/DefaultCatchBoundary"
 import { NotFound } from "./components/NotFound"
 import { routeTree } from "./routeTree.gen"
