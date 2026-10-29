@@ -6,8 +6,8 @@ import * as AsyncResult from "effect/reactivity/AsyncResult"
 import { NotFound } from "~/components/NotFound"
 import { postAtom } from "../utils/posts"
 
-export function PostErrorComponent({ error }: ErrorComponentProps) {
-  return <ErrorComponent error={error} />
+export function PostErrorComponent(props: ErrorComponentProps) {
+  return <ErrorComponent error={props.error} />
 }
 
 export const Route = createFileRoute("/posts/$postId")({

@@ -5,18 +5,19 @@ import {
   useRouter,
 } from "@tanstack/solid-router"
 import type { ErrorComponentProps } from "@tanstack/solid-router"
+import { createEffect } from "solid-js"
 
-export function DefaultCatchBoundary({ error }: ErrorComponentProps) {
+export function DefaultCatchBoundary(props: ErrorComponentProps) {
   const router = useRouter()
   const isRoot = useLocation({
     select: (location) => location.pathname === "/",
   })
 
-  console.error(error)
+  createEffect(() => console.error(props.error))
 
   return (
     <div class="min-w-0 flex-1 p-4 flex flex-col items-center justify-center gap-6">
-      <ErrorComponent error={error} />
+      <ErrorComponent error={props.error} />
       <div class="flex gap-2 items-center flex-wrap">
         <button
           onClick={() => {

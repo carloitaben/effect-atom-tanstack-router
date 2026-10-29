@@ -1,14 +1,20 @@
-# Welcome to TanStack.com!
+# TanStack Start - Basic Effect Atom Solid Example
 
-This site is built with TanStack Router!
+A TanStack Start example demonstrating integration with Effect Atom.
 
 - [TanStack Router Docs](https://tanstack.com/router)
+- [Effect Atom API Reference](https://www.effect.website/docs/v4/api/effect/reactivity/Atom)
+- [Effect Atom Solid API Reference](https://www.effect.website/docs/v4/api/atom-solid)
 
-It's deployed automagically with Netlify!
+## Start a new project based on this example
 
-- [Netlify](https://netlify.com/)
+To start a new project based on this example, run:
 
-## Development
+```sh
+npx gitpick carloitaben/effect-atom-tanstack-router/tree/main/examples/solid start-basic-effect-atom-solid
+```
+
+## Getting Started
 
 From your terminal:
 
@@ -19,54 +25,42 @@ pnpm dev
 
 This starts your app in development mode, rebuilding assets on file changes.
 
-## Editing and previewing the docs of TanStack projects locally
+## Effect Atom Devtools
 
-The documentations for all TanStack projects except for `React Charts` are hosted on [https://tanstack.com](https://tanstack.com), powered by this TanStack Router app.
-In production, the markdown doc pages are fetched from the GitHub repos of the projects, but in development they are read from the local file system.
+In development, the root route mounts a single unified TanStack Devtools shell
+with both the Router pane and an
+[Effect Atom pane](../../packages/effect-atom-tanstack-devtools):
 
-Follow these steps if you want to edit the doc pages of a project (in these steps we'll assume it's [`TanStack/form`](https://github.com/tanstack/form)) and preview them locally :
+```tsx
+import { TanStackDevtools } from "@tanstack/solid-devtools";
+import { TanStackRouterDevtoolsPanel } from "@tanstack/solid-router-devtools";
+import { createAtomDevtoolsPlugin } from "effect-atom-tanstack-devtools/solid";
 
-1. Create a new directory called `tanstack`.
+const plugins = [
+  { name: "TanStack Router", render: <TanStackRouterDevtoolsPanel /> },
+  createAtomDevtoolsPlugin({ registry }),
+];
 
-```sh
-mkdir tanstack
+{
+  import.meta.env.DEV && <TanStackDevtools plugins={plugins} />;
+}
 ```
 
-2. Enter the directory and clone this repo and the repo of the project there.
+Open the devtools trigger and choose **Effect Atom** to inspect the router's
+atom registry, or **TanStack Router** for the router pane. There is no separate
+Router or Atom floating shell.
+
+The Atom pane and plugin are no-ops outside development on their own. The
+`import.meta.env.DEV` branch only keeps the unified shell out of the production
+bundle, because `@tanstack/solid-devtools` does not strip its own shell.
+
+Sampling never initializes an atom or keeps one alive. The pane's only write is
+an explicit, confirmed Reset registry action.
+
+## Build
+
+To build the app for production:
 
 ```sh
-cd tanstack
-git clone git@github.com:TanStack/tanstack.com.git
-git clone git@github.com:TanStack/form.git
+pnpm build
 ```
-
-> [!NOTE]
-> Your `tanstack` directory should look like this:
->
-> ```
-> tanstack/
->    |
->    +-- form/
->    |
->    +-- tanstack.com/
-> ```
-
-> [!WARNING]
-> Make sure the name of the directory in your local file system matches the name of the project's repo. For example, `tanstack/form` must be cloned into `form` (this is the default) instead of `some-other-name`, because that way, the doc pages won't be found.
-
-3. Enter the `tanstack/tanstack.com` directory, install the dependencies and run the app in dev mode:
-
-```sh
-cd tanstack.com
-pnpm i
-# The app will run on https://localhost:3000 by default
-pnpm dev
-```
-
-4. Now you can visit http://localhost:3000/form/latest/docs/overview in the browser and see the changes you make in `tanstack/form/docs`.
-
-> [!NOTE]
-> The updated pages need to be manually reloaded in the browser.
-
-> [!WARNING]
-> You will need to update the `docs/config.json` file (in the project's repo) if you add a new doc page!

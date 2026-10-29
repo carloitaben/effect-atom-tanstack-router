@@ -1,0 +1,43 @@
+{
+  "name": "effect-atom-tanstack-router-core",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Shared Effect Atom SSR integration for TanStack Router",
+  "license": "MIT",
+  "files": [
+    "dist",
+    "LICENSE"
+  ],
+  "type": "module",
+  "sideEffects": false,
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.mts",
+      "development": "./src/index.ts",
+      "default": "./dist/index.mjs"
+    }
+  },
+  "publishConfig": {
+    "exports": {
+      ".": {
+        "types": "./dist/index.d.mts",
+        "default": "./dist/index.mjs"
+      }
+    }
+  },
+  "scripts": {
+    "build": "tsdown",
+    "prepublishOnly": "cp ../../LICENSE LICENSE",
+    "typecheck": "tsc"
+  },
+  "devDependencies": {
+    "@tanstack/router-core": "^1.171.27",
+    "effect": "4.0.5",
+    "tsdown": "^0.22.14",
+    "typescript": "catalog:"
+  },
+  "peerDependencies": {
+    "@tanstack/router-core": ">=1.171.27",
+    "effect": "^4.0.0"
+  }
+}

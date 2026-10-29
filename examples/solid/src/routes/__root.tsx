@@ -1,4 +1,5 @@
 /// <reference types="vite/client" />
+import { TanStackDevtools } from "@tanstack/solid-devtools"
 import {
   HeadContent,
   Link,
@@ -6,9 +7,11 @@ import {
   Scripts,
   createRootRouteWithContext,
 } from "@tanstack/solid-router"
-import { TanStackRouterDevtools } from "@tanstack/solid-router-devtools"
+import { TanStackRouterDevtoolsPanel } from "@tanstack/solid-router-devtools"
+import { createAtomDevtoolsPlugin } from "effect-atom-tanstack-devtools/solid"
 import type { AtomRegistry } from "effect/reactivity/AtomRegistry"
 import type { JSX } from "solid-js"
+import { Show } from "solid-js"
 import { HydrationScript } from "solid-js/web"
 import { DefaultCatchBoundary } from "~/components/DefaultCatchBoundary"
 import { NotFound } from "~/components/NotFound"
@@ -68,14 +71,39 @@ export const Route = createRootRouteWithContext<{
 })
 
 function RootComponent() {
+  const context = Route.useRouteContext()
+
   return (
     <RootDocument>
       <Outlet />
+      {/*
+        Dev-only shell. The panes are production no-ops on their own; this
+        guard only keeps the unified shell out of the production bundle.
+      */}
+      <Show when={import.meta.env.DEV}>
+        <Devtools registry={context().registry} />
+      </Show>
     </RootDocument>
   )
 }
 
-function RootDocument({ children }: { children: JSX.Element }) {
+function Devtools(props: { readonly registry: AtomRegistry }) {
+  const plugins = [
+    {
+      name: "TanStack Router",
+      render: <TanStackRouterDevtoolsPanel />,
+    },
+    createAtomDevtoolsPlugin({
+      get registry() {
+        return props.registry
+      },
+    }),
+  ]
+
+  return <TanStackDevtools plugins={plugins} />
+}
+
+function RootDocument(props: { children: JSX.Element }) {
   return (
     <html>
       <head>
@@ -136,8 +164,7 @@ function RootDocument({ children }: { children: JSX.Element }) {
           </Link>
         </div>
         <hr />
-        {children}
-        <TanStackRouterDevtools position="bottom-right" />
+        {props.children}
         <Scripts />
       </body>
     </html>
