@@ -6,8 +6,8 @@ import * as AsyncResult from "effect/reactivity/AsyncResult"
 import { NotFound } from "~/components/NotFound"
 import { userAtom } from "~/utils/users"
 
-export function UserErrorComponent({ error }: ErrorComponentProps) {
-  return <ErrorComponent error={error} />
+export function UserErrorComponent(props: ErrorComponentProps) {
+  return <ErrorComponent error={props.error} />
 }
 
 export const Route = createFileRoute("/users/$userId")({

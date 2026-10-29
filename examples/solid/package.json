@@ -11,10 +11,12 @@
   },
   "dependencies": {
     "@effect/atom-solid": "4.0.5",
+    "@tanstack/solid-devtools": "^0.8.13",
     "@tanstack/solid-router": "^1.170.30",
     "@tanstack/solid-router-devtools": "^1.167.1",
     "@tanstack/solid-start": "^1.168.47",
     "effect": "4.0.5",
+    "effect-atom-tanstack-devtools": "workspace:*",
     "effect-atom-tanstack-solid-router": "workspace:*",
     "solid-js": "^1.9.10",
     "tailwind-merge": "^3.6.0"

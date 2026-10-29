@@ -1,6 +1,6 @@
 # effect-atom-tanstack-react-router
 
-TanStack Router SSR hydration integration for Effect Atom, mirroring `@tanstack/router-ssr-query-core`.
+[TanStack Router](https://tanstack.com/router) SSR hydration integration and Devtools for [Effect Atom](https://effect.website).
 
 ## Usage
 

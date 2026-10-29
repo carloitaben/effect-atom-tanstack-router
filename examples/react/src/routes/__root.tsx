@@ -1,4 +1,4 @@
-/// <reference types="vite/client" />
+import { TanStackDevtools } from "@tanstack/react-devtools"
 import {
   HeadContent,
   Link,
@@ -6,7 +6,8 @@ import {
   Scripts,
   createRootRouteWithContext,
 } from "@tanstack/react-router"
-import { TanStackRouterDevtools } from "@tanstack/react-router-devtools"
+import { TanStackRouterDevtoolsPanel } from "@tanstack/react-router-devtools"
+import { createAtomDevtoolsPlugin } from "effect-atom-tanstack-devtools/react"
 import type { AtomRegistry } from "effect/reactivity/AtomRegistry"
 import * as React from "react"
 import { DefaultCatchBoundary } from "~/components/DefaultCatchBoundary"
@@ -67,11 +68,33 @@ export const Route = createRootRouteWithContext<{
 })
 
 function RootComponent() {
+  const { registry } = Route.useRouteContext()
+
   return (
     <RootDocument>
       <Outlet />
+      {/*
+        Dev-only shell. The panes are production no-ops on their own; this
+        guard only keeps the unified shell out of the production bundle.
+      */}
+      {import.meta.env.DEV && <Devtools registry={registry} />}
     </RootDocument>
   )
+}
+
+function Devtools({ registry }: { registry: AtomRegistry }) {
+  const plugins = React.useMemo(
+    () => [
+      {
+        name: "TanStack Router",
+        render: <TanStackRouterDevtoolsPanel />,
+      },
+      createAtomDevtoolsPlugin({ registry }),
+    ],
+    [registry],
+  )
+
+  return <TanStackDevtools plugins={plugins} />
 }
 
 function RootDocument({ children }: { children: React.ReactNode }) {
@@ -135,7 +158,6 @@ function RootDocument({ children }: { children: React.ReactNode }) {
         </div>
         <hr />
         {children}
-        <TanStackRouterDevtools position="bottom-right" />
         <Scripts />
       </body>
     </html>

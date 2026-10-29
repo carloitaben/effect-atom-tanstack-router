@@ -2,6 +2,7 @@ import { useAtomValue } from "@effect/atom-solid"
 import { Link, Outlet, createFileRoute } from "@tanstack/solid-router"
 import { awaitAtomSettled } from "effect-atom-tanstack-solid-router"
 import * as AsyncResult from "effect/reactivity/AsyncResult"
+import { For } from "solid-js"
 import { postsAtom } from "../utils/posts"
 
 export const Route = createFileRoute("/posts")({
@@ -21,8 +22,13 @@ function PostsComponent() {
   return (
     <div class="p-2 flex gap-2">
       <ul class="list-disc pl-4">
-        {[...posts(), { id: "i-do-not-exist", title: "Non-existent Post" }].map(
-          (post) => {
+        <For
+          each={[
+            ...posts(),
+            { id: "i-do-not-exist", title: "Non-existent Post" },
+          ]}
+        >
+          {(post) => {
             return (
               <li class="whitespace-nowrap">
                 <Link
@@ -37,8 +43,8 @@ function PostsComponent() {
                 </Link>
               </li>
             )
-          },
-        )}
+          }}
+        </For>
       </ul>
       <hr />
       <Outlet />

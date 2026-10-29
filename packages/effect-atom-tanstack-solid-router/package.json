@@ -31,9 +31,11 @@
     }
   },
   "scripts": {
+    "prebuild": "pnpm --filter effect-atom-tanstack-router-core build",
     "build": "tsdown",
     "prepublishOnly": "cp ../../LICENSE LICENSE",
     "test": "vitest",
+    "pretypecheck": "pnpm --filter effect-atom-tanstack-router-core build",
     "typecheck": "tsc"
   },
   "devDependencies": {
@@ -43,6 +45,7 @@
     "@tanstack/solid-router": "^1.170.30",
     "@types/react": "^19.0.8",
     "effect": "4.0.5",
+    "effect-atom-tanstack-router-core": "workspace:*",
     "solid-js": "^1.9.15",
     "tsdown": "^0.22.14",
     "typescript": "catalog:",
