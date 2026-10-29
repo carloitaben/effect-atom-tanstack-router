@@ -32,17 +32,17 @@ with both the Router pane and an
 [Effect Atom pane](../../packages/effect-atom-tanstack-devtools):
 
 ```tsx
-import { TanStackDevtools } from "@tanstack/solid-devtools"
-import { TanStackRouterDevtoolsPanel } from "@tanstack/solid-router-devtools"
-import { createAtomDevtoolsPlugin } from "effect-atom-tanstack-devtools/solid"
+import { TanStackDevtools } from "@tanstack/solid-devtools";
+import { TanStackRouterDevtoolsPanel } from "@tanstack/solid-router-devtools";
+import { createAtomDevtoolsPlugin } from "effect-atom-tanstack-devtools/solid";
 
 const plugins = [
   { name: "TanStack Router", render: <TanStackRouterDevtoolsPanel /> },
   createAtomDevtoolsPlugin({ registry }),
-]
+];
 
 {
-  import.meta.env.DEV && <TanStackDevtools plugins={plugins} />
+  import.meta.env.DEV && <TanStackDevtools plugins={plugins} />;
 }
 ```
 

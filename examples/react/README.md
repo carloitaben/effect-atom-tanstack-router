@@ -4,7 +4,6 @@ A TanStack Start example demonstrating integration with Effect Atom.
 
 - [TanStack Router Docs](https://tanstack.com/router)
 - [Effect Atom API Reference](https://www.effect.website/docs/v4/api/effect/reactivity/Atom)
-- [Effect Atom API Reference](https://www.effect.website/docs/v4/api/effect/reactivity/Atom)
 - [Effect Atom React API Reference](https://www.effect.website/docs/v4/api/atom-react)
 
 ## Start a new project based on this example
@@ -33,10 +32,10 @@ with both the Router pane and an
 [Effect Atom pane](../../packages/effect-atom-tanstack-devtools):
 
 ```tsx
-import { TanStackDevtools } from "@tanstack/react-devtools"
-import { TanStackRouterDevtoolsPanel } from "@tanstack/react-router-devtools"
-import { createAtomDevtoolsPlugin } from "effect-atom-tanstack-devtools/react"
-import * as React from "react"
+import { TanStackDevtools } from "@tanstack/react-devtools";
+import { TanStackRouterDevtoolsPanel } from "@tanstack/react-router-devtools";
+import { createAtomDevtoolsPlugin } from "effect-atom-tanstack-devtools/react";
+import * as React from "react";
 
 const plugins = React.useMemo(
   () => [
@@ -44,10 +43,10 @@ const plugins = React.useMemo(
     createAtomDevtoolsPlugin({ registry }),
   ],
   [registry],
-)
+);
 
 {
-  import.meta.env.DEV && <TanStackDevtools plugins={plugins} />
+  import.meta.env.DEV && <TanStackDevtools plugins={plugins} />;
 }
 ```
 
