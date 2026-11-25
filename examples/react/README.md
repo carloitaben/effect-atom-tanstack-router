@@ -68,12 +68,3 @@ To build the app for production:
 ```sh
 pnpm build
 ```
-
-## TanStack Query Integration
-
-This example demonstrates how to use TanStack Query with TanStack Start for:
-
-- Server-side data fetching
-- Client-side caching and synchronization
-- Optimistic updates
-- Automatic refetching

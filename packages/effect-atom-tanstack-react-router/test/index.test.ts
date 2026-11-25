@@ -7,9 +7,14 @@ import {
 import { attachRouterServerSsrUtils } from "@tanstack/react-router/ssr/server"
 import * as Duration from "effect/Duration"
 import * as Effect from "effect/Effect"
+import * as Layer from "effect/Layer"
 import * as AsyncResult from "effect/reactivity/AsyncResult"
 import * as Atom from "effect/reactivity/Atom"
 import * as AtomRegistry from "effect/reactivity/AtomRegistry"
+import * as AtomRpc from "effect/reactivity/AtomRpc"
+import * as Rpc from "effect/rpc/Rpc"
+import * as RpcGroup from "effect/rpc/RpcGroup"
+import * as RpcTest from "effect/rpc/RpcTest"
 import * as Schema from "effect/Schema"
 import { afterEach, describe, expect, it, vi } from "vitest"
 import {
@@ -175,6 +180,57 @@ const makeRegistry = () => {
 
 afterEach(() => {
   while (disposals.length > 0) disposals.pop()!()
+})
+
+describe("RPC query freshness", () => {
+  it.each([
+    { staleTime: "1 minute" as const, expectedRequests: 1 },
+    { staleTime: 0, expectedRequests: 2 },
+  ])(
+    "hydrates a query with staleTime $staleTime",
+    async ({ staleTime, expectedRequests }) => {
+      let requests = 0
+      const group = RpcGroup.make(Rpc.make("get", { success: Schema.Number }))
+      const handlers = group.toLayer({
+        get: () => Effect.sync(() => ++requests),
+      })
+      class Client extends AtomRpc.Service<Client>()("FreshnessTest", {
+        group,
+        protocol: Layer.empty,
+        makeEffect: RpcTest.makeClient(group, { flatten: true }).pipe(
+          Effect.provide(handlers),
+        ),
+      }) {}
+      const query = (freshness: number | "1 minute") =>
+        Client.query("get", undefined, {
+          serializationKey: "value",
+          staleTime: freshness,
+          timeToLive: "5 minutes",
+        })
+      const server = makeRegistry()
+      const serverAtom = query("1 minute")
+      const router = await startServerRequest(server, serverAtom)
+      await Effect.runPromise(AtomRegistry.getResult(server, serverAtom))
+      const state = await dehydrate(router)
+
+      const client = makeRegistry()
+      const clientRouter = makeClientRouter(client)
+      await hydrate(clientRouter, state)
+      const clientAtom = query(staleTime)
+      client.mount(clientAtom)
+      expect(AsyncResult.getOrThrow(client.get(clientAtom))).toBe(1)
+      await Effect.runPromise(Effect.yieldNow)
+      if (staleTime === 0) {
+        await vi.waitFor(() => expect(requests).toBe(2))
+      }
+      const value = await Effect.runPromise(
+        AtomRegistry.getResult(client, clientAtom, { suspendOnWaiting: true }),
+      )
+      expect(value).toBe(expectedRequests)
+      expect(requests).toBe(expectedRequests)
+      router.serverSsr?.cleanup()
+    },
+  )
 })
 
 describe("setupRouterAtomIntegration dehydrate", () => {
