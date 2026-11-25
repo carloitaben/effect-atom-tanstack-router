@@ -1,97 +1,69 @@
-import { notFound } from "@tanstack/solid-router"
-import { createServerFn } from "@tanstack/solid-start"
-import * as Effect from "effect/Effect"
+import { createIsomorphicFn } from "@tanstack/solid-start"
+import { getRequestUrl } from "@tanstack/solid-start/server"
 import * as FetchHttpClient from "effect/http/FetchHttpClient"
-import * as HttpClient from "effect/http/HttpClient"
-import * as HttpClientError from "effect/http/HttpClientError"
-import * as HttpClientResponse from "effect/http/HttpClientResponse"
-import * as AsyncResult from "effect/reactivity/AsyncResult"
-import * as Atom from "effect/reactivity/Atom"
+import * as Layer from "effect/Layer"
+import * as AtomRpc from "effect/reactivity/AtomRpc"
+import * as Rpc from "effect/rpc/Rpc"
+import * as RpcClient from "effect/rpc/RpcClient"
+import * as RpcGroup from "effect/rpc/RpcGroup"
+import * as RpcSerialization from "effect/rpc/RpcSerialization"
 import * as Schema from "effect/Schema"
 
-const PostSchema = Schema.Struct({
+export const PostSchema = Schema.Struct({
   id: Schema.Number,
   title: Schema.String,
   body: Schema.String,
 })
 
-export type PostType = Schema.Schema.Type<typeof PostSchema>
+export type PostType = typeof PostSchema.Type
 
-const getJson = <A,>(url: string, schema: Schema.ConstraintDecoder<A>) =>
-  Effect.runPromise(
-    HttpClient.get(url).pipe(
-      Effect.flatMap(HttpClientResponse.filterStatusOk),
-      Effect.flatMap(HttpClientResponse.schemaBodyJson(schema)),
-      Effect.provide(FetchHttpClient.layer),
-    ),
-  )
+export class PostNotFound extends Schema.TaggedError<PostNotFound>()(
+  "PostNotFound",
+  { id: Schema.String },
+) {}
 
-export const fetchPosts = createServerFn({ method: "GET" }).handler(
-  async () => {
-    console.info("Fetching posts...")
-    return (
-      await getJson(
-        "https://jsonplaceholder.typicode.com/posts",
-        Schema.Array(PostSchema),
-      )
-    ).slice(0, 10)
-  },
+export class PostsError extends Schema.TaggedError<PostsError>()("PostsError", {
+  message: Schema.String,
+}) {}
+
+export const PostsRpcs = RpcGroup.make(
+  Rpc.make("ListPosts", {
+    success: Schema.Array(PostSchema),
+    error: PostsError,
+  }),
+  Rpc.make("GetPost", {
+    payload: { id: Schema.String },
+    success: PostSchema,
+    error: Schema.Union([PostNotFound, PostsError]),
+  }),
 )
 
-const postResultSchema = AsyncResult.Schema({
-  success: PostSchema,
-  error: Schema.String,
+const getOrigin = createIsomorphicFn()
+  .server(() => getRequestUrl().origin)
+  .client(() => window.location.origin)
+
+export class PostsClient extends AtomRpc.Service<PostsClient>()("PostsClient", {
+  group: PostsRpcs,
+  protocol: () =>
+    RpcClient.layerProtocolHttp({ url: `${getOrigin()}/api/posts-rpc` }).pipe(
+      Layer.provide(RpcSerialization.layerJson),
+      Layer.provide(FetchHttpClient.layer),
+    ),
+}) {}
+
+export const postsAtom = PostsClient.query("ListPosts", undefined, {
+  serializationKey: "all",
+  staleTime: "1 minute",
+  timeToLive: "5 minutes",
 })
 
-export const postsAtom = Atom.make(
-  Effect.tryPromise({
-    try: () => fetchPosts(),
-    catch: (error) => (error instanceof Error ? error.message : String(error)),
-  }),
-).pipe(
-  Atom.keepAlive,
-  Atom.serializable({
-    key: "posts",
-    schema: AsyncResult.Schema({
-      success: Schema.mutable(Schema.Array(PostSchema)),
-      error: Schema.String,
-    }),
-  }),
-)
-
-export const fetchPost = createServerFn({ method: "GET" })
-  .validator((d: string) => d)
-  .handler(async ({ data }) => {
-    console.info(`Fetching post with id ${data}...`)
-    try {
-      return await getJson(
-        `https://jsonplaceholder.typicode.com/posts/${data}`,
-        PostSchema,
-      )
-    } catch (error) {
-      console.error(error)
-      if (
-        HttpClientError.isHttpClientError(error) &&
-        error.response?.status === 404
-      ) {
-        throw notFound()
-      }
-      throw error
-    }
-  })
-
-export const postAtom = Atom.family((postId: string) =>
-  Atom.make(
-    Effect.tryPromise({
-      try: () => fetchPost({ data: postId }),
-      catch: (error) =>
-        error instanceof Error ? error.message : String(error),
-    }),
-  ).pipe(
-    Atom.keepAlive,
-    Atom.serializable({
-      key: `post:${postId}`,
-      schema: postResultSchema,
-    }),
-  ),
-)
+export const postAtom = (id: string) =>
+  PostsClient.query(
+    "GetPost",
+    { id },
+    {
+      serializationKey: id,
+      staleTime: "1 minute",
+      timeToLive: "5 minutes",
+    },
+  )

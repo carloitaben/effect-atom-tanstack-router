@@ -1,17 +1,27 @@
 import { useAtomSuspense } from "@effect/atom-react"
-import { ErrorComponent, Link, createFileRoute } from "@tanstack/react-router"
+import {
+  ErrorComponent,
+  Link,
+  createFileRoute,
+  notFound,
+} from "@tanstack/react-router"
 import type { ErrorComponentProps } from "@tanstack/react-router"
 import { awaitAtomSettled } from "effect-atom-tanstack-react-router"
+import * as Effect from "effect/Effect"
 import * as AsyncResult from "effect/reactivity/AsyncResult"
 import { NotFound } from "~/components/NotFound"
-import { postAtom } from "../utils/posts"
+import { PostNotFound, postAtom } from "../utils/posts"
 
 export const Route = createFileRoute("/posts/$postId")({
   loader: async ({ params: { postId }, context }) => {
     const data = await awaitAtomSettled(context.registry, postAtom(postId))
 
-    return {
-      title: AsyncResult.getOrThrow(data).title,
+    try {
+      const post = await Effect.runPromise(AsyncResult.toExit(data))
+      return { title: post.title }
+    } catch (error) {
+      if (error instanceof PostNotFound) throw notFound()
+      throw error
     }
   },
   head: ({ loaderData }) => ({

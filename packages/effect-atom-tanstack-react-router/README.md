@@ -74,7 +74,21 @@ loader: async ({ params: { postId }, context }) => {
 ```
 
 > [!WARNING]
-> Atoms must be marked `Atom.serializable()` and require `Atom.keepAlive` for them to be picked up by the integration.
+> Atoms must be serializable and retained in the registry during SSR to be picked up by the integration.
+
+### Avoiding a duplicate request after hydration
+
+For `AtomRpc` non-streaming queries and `AtomHttpApi` queries, set `serializationKey` and `staleTime` to reuse a fresh server result instead of immediately requesting it again in the browser:
+
+```ts
+const postsAtom = PostsClient.query("ListPosts", undefined, {
+  serializationKey: "all",
+  staleTime: "1 minute",
+  timeToLive: "5 minutes",
+});
+```
+
+The query handles serialization. A stale result remains visible while it revalidates; `timeToLive` separately controls how long an unused result is retained. See the [React RPC example](../../examples/react/src/utils/posts.tsx).
 
 ## License
 

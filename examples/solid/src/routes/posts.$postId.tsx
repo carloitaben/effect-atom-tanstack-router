@@ -1,10 +1,16 @@
 import { useAtomValue } from "@effect/atom-solid"
-import { ErrorComponent, Link, createFileRoute } from "@tanstack/solid-router"
+import {
+  ErrorComponent,
+  Link,
+  createFileRoute,
+  notFound,
+} from "@tanstack/solid-router"
 import type { ErrorComponentProps } from "@tanstack/solid-router"
 import { awaitAtomSettled } from "effect-atom-tanstack-solid-router"
+import * as Effect from "effect/Effect"
 import * as AsyncResult from "effect/reactivity/AsyncResult"
 import { NotFound } from "~/components/NotFound"
-import { postAtom } from "../utils/posts"
+import { PostNotFound, postAtom } from "../utils/posts"
 
 export function PostErrorComponent(props: ErrorComponentProps) {
   return <ErrorComponent error={props.error} />
@@ -14,8 +20,12 @@ export const Route = createFileRoute("/posts/$postId")({
   loader: async ({ params: { postId }, context }) => {
     const data = await awaitAtomSettled(context.registry, postAtom(postId))
 
-    return {
-      title: AsyncResult.getOrThrow(data).title,
+    try {
+      const post = await Effect.runPromise(AsyncResult.toExit(data))
+      return { title: post.title }
+    } catch (error) {
+      if (error instanceof PostNotFound) throw notFound()
+      throw error
     }
   },
   head: ({ loaderData }) => ({

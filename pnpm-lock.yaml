@@ -30,8 +30,8 @@ importers:
   examples/react:
     dependencies:
       '@effect/atom-react':
-        specifier: 4.0.5
-        version: 4.0.5(effect@4.0.5)(react@19.2.8)(scheduler@0.27.0)
+        specifier: 4.1.5
+        version: 4.1.5(effect@4.1.5)(react@19.2.8)(scheduler@0.27.0)
       '@tanstack/react-devtools':
         specifier: ^0.10.13
         version: 0.10.13(@types/react-dom@19.2.5(@types/react@19.2.18))(@types/react@19.2.18)(csstype@3.2.3)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)(solid-js@1.9.15)
@@ -45,8 +45,8 @@ importers:
         specifier: ^1.168.49
         version: 1.168.49(crossws@0.4.12(srvx@0.12.7))(react-dom@19.2.8(react@19.2.8))(react@19.2.8)(rolldown@1.2.6)(vite-plugin-solid@2.11.14(solid-js@1.9.15)(vite@8.2.2(@types/node@22.20.1)(jiti@2.7.0)))(vite@8.2.2(@types/node@22.20.1)(jiti@2.7.0))
       effect:
-        specifier: 4.0.5
-        version: 4.0.5
+        specifier: 4.1.5
+        version: 4.1.5
       effect-atom-tanstack-devtools:
         specifier: workspace:*
         version: link:../../packages/effect-atom-tanstack-devtools
@@ -91,8 +91,8 @@ importers:
   examples/solid:
     dependencies:
       '@effect/atom-solid':
-        specifier: 4.0.5
-        version: 4.0.5(effect@4.0.5)(solid-js@1.9.15)
+        specifier: 4.1.5
+        version: 4.1.5(effect@4.1.5)(solid-js@1.9.15)
       '@tanstack/solid-devtools':
         specifier: ^0.8.13
         version: 0.8.13(csstype@3.2.3)(solid-js@1.9.15)
@@ -106,8 +106,8 @@ importers:
         specifier: ^1.168.47
         version: 1.168.47(@tanstack/react-router@1.170.32(react-dom@19.2.8(react@19.2.8))(react@19.2.8))(crossws@0.4.12(srvx@0.12.7))(rolldown@1.2.6)(solid-js@1.9.15)(vite-plugin-solid@2.11.14(solid-js@1.9.15)(vite@8.2.2(@types/node@22.20.1)(jiti@2.7.0)))(vite@8.2.2(@types/node@22.20.1)(jiti@2.7.0))
       effect:
-        specifier: 4.0.5
-        version: 4.0.5
+        specifier: 4.1.5
+        version: 4.1.5
       effect-atom-tanstack-devtools:
         specifier: workspace:*
         version: link:../../packages/effect-atom-tanstack-devtools
@@ -167,8 +167,8 @@ importers:
         specifier: ^1.9.15
         version: 1.9.15(@babel/core@7.29.7)(solid-js@1.9.15)
       effect:
-        specifier: 4.0.5
-        version: 4.0.5
+        specifier: 4.1.5
+        version: 4.1.5
       jsdom:
         specifier: ^30.1.3
         version: 30.1.3
@@ -197,11 +197,11 @@ importers:
   packages/effect-atom-tanstack-react-router:
     devDependencies:
       '@effect/atom-react':
-        specifier: 4.0.5
-        version: 4.0.5(effect@4.0.5)(react@19.2.8)(scheduler@0.27.0)
+        specifier: 4.1.5
+        version: 4.1.5(effect@4.1.5)(react@19.2.8)(scheduler@0.27.0)
       '@effect/vitest':
-        specifier: 4.0.5
-        version: 4.0.5(effect@4.0.5)(vitest@5.0.5(@types/node@22.20.1)(jsdom@30.1.3)(vite@8.2.2(@types/node@22.20.1)(jiti@2.7.0)))
+        specifier: 4.1.5
+        version: 4.1.5(effect@4.1.5)(vitest@5.0.5(@types/node@22.20.1)(jsdom@30.1.3)(vite@8.2.2(@types/node@22.20.1)(jiti@2.7.0)))
       '@tanstack/react-router':
         specifier: ^1.170.32
         version: 1.170.32(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
@@ -212,8 +212,8 @@ importers:
         specifier: ^19.0.8
         version: 19.2.18
       effect:
-        specifier: 4.0.5
-        version: 4.0.5
+        specifier: 4.1.5
+        version: 4.1.5
       effect-atom-tanstack-router-core:
         specifier: workspace:*
         version: link:../router-atom-core
@@ -233,11 +233,11 @@ importers:
   packages/effect-atom-tanstack-solid-router:
     devDependencies:
       '@effect/atom-solid':
-        specifier: 4.0.5
-        version: 4.0.5(effect@4.0.5)(solid-js@1.9.15)
+        specifier: 4.1.5
+        version: 4.1.5(effect@4.1.5)(solid-js@1.9.15)
       '@effect/vitest':
-        specifier: 4.0.5
-        version: 4.0.5(effect@4.0.5)(vitest@5.0.5(@types/node@22.20.1)(jsdom@30.1.3)(vite@8.2.2(@types/node@22.20.1)(jiti@2.7.0)))
+        specifier: 4.1.5
+        version: 4.1.5(effect@4.1.5)(vitest@5.0.5(@types/node@22.20.1)(jsdom@30.1.3)(vite@8.2.2(@types/node@22.20.1)(jiti@2.7.0)))
       '@tanstack/router-core':
         specifier: ^1.171.27
         version: 1.171.27
@@ -248,8 +248,8 @@ importers:
         specifier: ^19.0.8
         version: 19.2.18
       effect:
-        specifier: 4.0.5
-        version: 4.0.5
+        specifier: 4.1.5
+        version: 4.1.5
       effect-atom-tanstack-router-core:
         specifier: workspace:*
         version: link:../router-atom-core
@@ -272,8 +272,8 @@ importers:
         specifier: ^1.171.27
         version: 1.171.27
       effect:
-        specifier: 4.0.5
-        version: 4.0.5
+        specifier: 4.1.5
+        version: 4.1.5
       tsdown:
         specifier: ^0.22.14
         version: 0.22.14(typescript@7.0.2)
@@ -533,23 +533,23 @@ packages:
     resolution: {integrity: sha512-OoKoR0f76dCY666JlcbhmVTs2drYj1GUXZTYTcbUgJjh9Nv41aFfZ21bPQTERm5+L5cBDo466NltB2lplS5GBw==}
     engines: {node: '>=20.19.0'}
 
-  '@effect/atom-react@4.0.5':
-    resolution: {integrity: sha512-tqTSiy0rWBitej7kPfvTSw29q4ipof52+txDg6bIBJx0ksHVzVXaFTsssDa+AZBeImafK0xmjm9m1XzPfE6k2A==}
+  '@effect/atom-react@4.1.5':
+    resolution: {integrity: sha512-7bFJUOa4hatIE4LD4EmuOSS7+jNniZxaltX3TRExBCYAFqMd6vjZs9G/Ez3u24oUaJnkschmjfG3EwVzzebgig==}
     peerDependencies:
-      effect: ^4.0.5
+      effect: ^4.1.5
       react: '>=19.0.0 <20.0.0'
       scheduler: '>=0.25.0 <0.29.0'
 
-  '@effect/atom-solid@4.0.5':
-    resolution: {integrity: sha512-PPmeRywS96HRFrOaYBrgizbTx816/ENkJx/hdMzr6MccKONZiZsIOxMBXTW6XR8dDSGtCRQa27F3oQG2s3KRZw==}
+  '@effect/atom-solid@4.1.5':
+    resolution: {integrity: sha512-ftINGDKHMoiq6rM3KMcsnbgqzU23uRJk+GTvFAxF5HkayE1K91DxL1C2B0WmAwfh6dwSMo9QKDaYPbE8pAzGiw==}
     peerDependencies:
-      effect: ^4.0.5
+      effect: ^4.1.5
       solid-js: '>=1.9.14 <2.0.0'
 
-  '@effect/vitest@4.0.5':
-    resolution: {integrity: sha512-q64paZ/i4V2NiRhTyqCmT2KiDbFjlxc2EZrZca8GGt+Nf8844946HyJM5bPk/q+YeRkFSxIrlCs+J+LSfky/wA==}
+  '@effect/vitest@4.1.5':
+    resolution: {integrity: sha512-18u1013wkJtSelk1ZYLc/5aUnluTQyDfi2hAemkJW1GQ9qXw4mtPSiSf0AXZPhesmGCvG1Dk2C4JYD2sz+R72w==}
     peerDependencies:
-      effect: ^4.0.5
+      effect: ^4.1.5
       vitest: '>=5.0.0 <6.0.0'
 
   '@eslint-community/eslint-utils@4.10.1':
@@ -1987,8 +1987,8 @@ packages:
       oxc-resolver:
         optional: true
 
-  effect@4.0.5:
-    resolution: {integrity: sha512-BY4/28NlpOd99yzmV741xbVGmp+1U7tks4oB7F/Png64bTa5tm5eCA6W0RiXsnuLDDoJpjfVSo4Dnq4BZb/89Q==}
+  effect@4.1.5:
+    resolution: {integrity: sha512-xyR20KhQI0vg2gD8ILUSQRTTESEYJ0JKdP+QD8J37xbwPTqXRxFM/l0+vUVD9fuSvoYruoTqyt33C4FZv1s4TQ==}
 
   electron-to-chromium@1.5.418:
     resolution: {integrity: sha512-UzS26r3AEbG5wSoGVpJKqwHIU9zwQN7LHdVIThDrJpS0I5KdlXFMEb8543fhc9dVnIIAST6ar8rhwa00AL5MlA==}
@@ -2884,6 +2884,7 @@ packages:
 
   tldts-core@7.4.20:
     resolution: {integrity: sha512-C630TWXZCZmLq0F2bW4QqwnaaxCQ/svpAqvJwnC4JvgEM5ohhBnGsEzTLSOXcN+xjz+kEaHS5uoWIw2klnqd0A==}
+    deprecated: Partial release, see https://github.com/remusao/tldts/issues/2735. Use >=7.4.22.
 
   tldts@7.4.19:
     resolution: {integrity: sha512-48dH6aSpQnpbzDUc4vIQZ1VjB8tkK+e8c1yx05/SZK+rkssgjEOlxDd/yU8/a4vGYQ9vRgJr9dwMq9TJ0b3X2Q==}
@@ -3194,12 +3195,15 @@ packages:
 
   yuku-ast@0.8.7:
     resolution: {integrity: sha512-h6+4bDfyootiMB9vckk5uKo5r5j0GHrkr17FQTDNfEsFT3DWlN9uu1HJwQwc64pgmLCI945fWM3lbTIqxjT3GQ==}
+    deprecated: 'Yuku is now one package with one core. Use "yuku" instead: https://yuku.fyi/javascript/. Existing installs keep working but get no more fixes.'
 
   yuku-codegen@0.8.7:
     resolution: {integrity: sha512-adwDZSh8oVDzhE6Du9PwVWxcOxeV0e2EVhUuMKWfhSY4wkrDq9eqixlxFF3l/XGUV1E7UFzhpz9393MUumkyNw==}
+    deprecated: 'Yuku is now one package with one core. Use "yuku" instead: https://yuku.fyi/javascript/. Existing installs keep working but get no more fixes.'
 
   yuku-parser@0.8.7:
     resolution: {integrity: sha512-vRD9nwt4L3aYpxNqeSC4WqLv58xrXef0Ong1Mc45CTXTIpvLafx7JO05sczmQZwdLEZvywrLOGdNC5+Rp5N1BQ==}
+    deprecated: 'Yuku is now one package with one core. Use "yuku" instead: https://yuku.fyi/javascript/. Existing installs keep working but get no more fixes.'
 
   zod@4.5.4:
     resolution: {integrity: sha512-sC95tT5iHHH9gtpj6A81kh+NEaRAUFN+qlUPDUbRfOMvNf5QCBqsb3WgvnpVtK5Y+4UfA6KqufotuTvMGiTlsA==}
@@ -3602,20 +3606,20 @@ snapshots:
 
   '@csstools/css-tokenizer@4.0.2': {}
 
-  '@effect/atom-react@4.0.5(effect@4.0.5)(react@19.2.8)(scheduler@0.27.0)':
+  '@effect/atom-react@4.1.5(effect@4.1.5)(react@19.2.8)(scheduler@0.27.0)':
     dependencies:
-      effect: 4.0.5
+      effect: 4.1.5
       react: 19.2.8
       scheduler: 0.27.0
 
-  '@effect/atom-solid@4.0.5(effect@4.0.5)(solid-js@1.9.15)':
+  '@effect/atom-solid@4.1.5(effect@4.1.5)(solid-js@1.9.15)':
     dependencies:
-      effect: 4.0.5
+      effect: 4.1.5
       solid-js: 1.9.15
 
-  '@effect/vitest@4.0.5(effect@4.0.5)(vitest@5.0.5(@types/node@22.20.1)(jsdom@30.1.3)(vite@8.2.2(@types/node@22.20.1)(jiti@2.7.0)))':
+  '@effect/vitest@4.1.5(effect@4.1.5)(vitest@5.0.5(@types/node@22.20.1)(jsdom@30.1.3)(vite@8.2.2(@types/node@22.20.1)(jiti@2.7.0)))':
     dependencies:
-      effect: 4.0.5
+      effect: 4.1.5
       vitest: 5.0.5(@types/node@22.20.1)(jsdom@30.1.3)(vite@8.2.2(@types/node@22.20.1)(jiti@2.7.0))
 
   '@eslint-community/eslint-utils@4.10.1(eslint@10.13.0(jiti@2.7.0))':
@@ -4812,7 +4816,7 @@ snapshots:
 
   dts-resolver@3.0.0: {}
 
-  effect@4.0.5: {}
+  effect@4.1.5: {}
 
   electron-to-chromium@1.5.418: {}
 
